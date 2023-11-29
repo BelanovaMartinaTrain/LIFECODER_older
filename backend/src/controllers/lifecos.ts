@@ -38,6 +38,10 @@ export const createLifeco: RequestHandler<unknown, unknown, ILifecoBody, unknown
             throw createHttpError(400, "Title is required")
         }
 
+        if (!req.body.category) {
+            req.body.category = ["General"]
+        }
+
         const lifeco = req.body;
         const createLifecoo = await LifecoModel.create(lifeco)
         console.log(createLifecoo)
@@ -62,6 +66,10 @@ export const updateLifeco: RequestHandler<updateLifecoParams, unknown, ILifecoBo
 
         if (req.body.title === "") {
             throw createHttpError(400, "Lifeco has to have a title")
+        }
+        
+        if (!req.body.category) {
+            req.body.category = ["General"]
         }
 
         const lifeco = await LifecoModel.findByIdAndUpdate({_id: id}, {...req.body}, {new: true}).exec();
