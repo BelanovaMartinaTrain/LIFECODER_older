@@ -46,3 +46,18 @@ export const signUp: RequestHandler<
     next(error);
   }
 };
+
+type LoginBody = {
+  email: string;
+  password: string;
+};
+
+export const Login: RequestHandler<
+  unknown,
+  unknown,
+  LoginBody,
+  unknown
+> = async (req, res, next) => {
+  const email = req.body.email;
+  const passwordRaw = req.body.password;
+};
